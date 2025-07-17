@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Zodiac Prophecy</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="zodiac-wheel-bg"></div>
+    <div class="moving-stars"></div>
+    <div class="interactive-celestial"></div>
+    <div class="celestial-bg">
+        <div class="stars"></div>
+        
+        <header class="main-header fixed-header">
+            <div class="logo-container">
+                <div class="zodiac-logo">
+                    <div class="logo-symbol">☿</div>
+                </div>
+                <h1 class="brand-title">The Zodiac Prophecy</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="#home" class="nav-link active" data-page="home">Home</a>
+                <a href="#about" class="nav-link" data-page="about">Cosmic Guide</a>
+            </nav>
+        </header>
+        
+        <div class="container">
+            <main>
+                <div id="homePage" class="page active">
+                    <div class="hero-section">
+                        <div class="cosmic-energy-indicator">
+                            <div class="energy-orb"></div>
+                            <span class="energy-text">Cosmic Energy: <span id="energyLevel">High</span></span>
+                            <button onclick="showCosmicEnergyInfo()" class="info-btn" title="Learn about Cosmic Energy">i</button>
+                        </div>
+                        
+                        <h1 class="main-title">Welcome to Your Celestial Journey</h1>
+                        <p class="hero-subtitle">Discover the ancient wisdom written in the stars. Your cosmic destiny awaits revelation through the eternal dance of celestial bodies.</p>
+                        
+                        <div class="cosmic-info">
+                            <div class="cosmic-date">
+                                <span class="date-label">Current Cosmic Date:</span>
+                                <span id="cosmicDate"></span>
+                                <button onclick="showCosmicDateInfo()" class="info-btn" title="Learn about Cosmic Time">i</button>
+                            </div>
+                            <div class="cosmic-phase">
+                                <span class="phase-label">Lunar Phase:</span>
+                                <span id="lunarPhase">Waxing Crescent</span>
+                                <button onclick="showLunarPhaseInfo()" class="info-btn" title="Learn about Lunar Phases">i</button>
+                            </div>
+                        </div>
+                        
+                        <button onclick="startProphecy()" class="start-btn">
+                            <span class="btn-text">Begin Your Prophecy</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="informationPage" class="page">
+                    <form id="zodiacForm" class="prophecy-form laptop-layout">
+                        <div class="form-header">
+                            <h2>Personal Celestial Information</h2>
+                            <p class="form-subtitle">The stars require your earthly details to reveal your cosmic truth</p>
+                        </div>
+                        
+                        <div class="form-section laptop-grid">
+                            <div class="form-step">
+                                <div class="step-header">
+                                    <h3>Personal Information</h3>
+                                </div>
+                                <div class="name-group">
+                                    <div class="input-group">
+                                        <label for="surname">Surname</label>
+                                        <input type="text" id="surname" name="surname" required placeholder="ENTER SURNAME" tabindex="1">
+                                        <span class="error-msg" id="surnameError"></span>
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" id="firstName" name="firstName" required placeholder="ENTER FIRST NAME" tabindex="2">
+                                        <span class="error-msg" id="firstNameError"></span>
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                        <label for="middleInitial">Middle Initial</label>
+                                        <input type="text" id="middleInitial" name="middleInitial" maxlength="2" placeholder="X." tabindex="3">
+                                        <span class="error-msg" id="middleInitialError"></span>
+                                    </div>
+                                    
+                                    <div class="input-group suffix-group">
+                                        <label for="suffix">Suffix (Optional)</label>
+                                        <select id="suffix" name="suffix" tabindex="4">
+                                            <option value="">Please Specify / Others</option>
+                                            <option value="JR">JR</option>
+                                            <option value="SR">SR</option>
+                                            <option value="II">II</option>
+                                            <option value="III">III</option>
+                                            <option value="IV">IV</option>
+                                            <option value="V">V</option>
+                                            <option value="VI">VI</option>
+                                            <option value="ESQ">ESQ</option>
+                                            <option value="PHD">PHD</option>
+                                            <option value="MD">MD</option>
+                                            <option value="OTHERS">Others (Specify)</option>
+                                        </select>
+                                        <input type="text" id="customSuffix" name="customSuffix" placeholder="ENTER SUFFIX" style="display: none; margin-top: 10px;" tabindex="5">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="gender-birthdate-row">
+                            <div class="form-step gender-step">
+                                <div class="step-header">
+                                    <h3>Gender</h3>
+                                </div>
+                                <div class="gender-group">
+                                    <div class="radio-group">
+                                        <label class="radio-label">
+                                            <input type="radio" name="gender" value="MALE" required tabindex="6">
+                                            <span class="radio-text">Male</span>
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="gender" value="FEMALE" required tabindex="7">
+                                            <span class="radio-text">Female</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-step birthdate-step">
+                                <div class="step-header">
+                                    <h3>Birth Date</h3>
+                                </div>
+                                <div class="birthdate-group modern-date">
+                                    <div class="date-inputs-modern">
+                                        <div class="date-field">
+                                            <label for="month">Month</label>
+                                            <select id="month" name="month" required tabindex="8">
+                                                <option value="">Select Month</option>
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="date-field">
+                                            <label for="day">Day</label>
+                                            <select id="day" name="day" required tabindex="9">
+                                                <option value="">Select Day</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="date-field">
+                                            <label for="year">Year</label>
+                                            <select id="year" name="year" required tabindex="10">
+                                                <option value="">Select Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" onclick="goToHome()" class="back-btn">
+                                <span>← Back</span>
+                            </button>
+                            <button type="submit" class="submit-btn">
+                                <span class="btn-text">Reveal My Prophecy</span>
+                                <div class="btn-glow"></div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="resultPage" class="page">
+                    <div id="prophecyResult" class="prophecy-result laptop-layout">
+                        <div class="result-header">
+                            <div class="cosmic-energy-display">
+                                <div class="energy-meter">
+                                    <div class="energy-level" id="energyMeter"></div>
+                                </div>
+                                <span class="energy-label">Cosmic Energy Level: <span id="energyPercentage">0%</span></span>
+                                <button onclick="showCosmicEnergyPercentageInfo()" class="info-btn" title="Learn about Energy Levels">i</button>
+                            </div>
+                            
+                            <div class="date-adjuster">
+                                <button onclick="adjustDate(-1)" class="date-btn">← Previous Day</button>
+                                <span id="currentResultDate" class="current-date"></span>
+                                <button onclick="adjustDate(1)" class="date-btn">Next Day →</button>
+                            </div>
+                        </div>
+                        
+                        <div class="zodiac-prophecy-combined">
+                            <div class="zodiac-info-section">
+                                <div class="zodiac-symbol-placeholder">
+                                    <div id="zodiacSymbol" class="zodiac-symbol">♈</div>
+                                </div>
+                                <div class="zodiac-details">
+                                    <h3 id="zodiacSignName">Your Sign</h3>
+                                    <div class="cosmic-alignment">
+                                        <span class="alignment-text">Alignment: <span id="cosmicAlignment">Favorable</span></span>
+                                        <button onclick="showCosmicAlignmentInfo()" class="info-btn" title="Learn about Cosmic Alignment">i</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="prophecy-section">
+                                <h4>Your Daily Celestial Prophecy</h4>
+                                <p id="mainProphecy">Your cosmic guidance awaits...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="prophecy-categories">
+                            <h3 class="categories-title">Cosmic Influences</h3>
+                            <div class="categories-subtitle">Click to View Your Detailed Cosmic Insights</div>
+                            
+                            <div class="category-grid">
+                                <div class="category-card" data-category="0" onclick="selectCategory(0)">
+                                    <div class="category-icon love-icon">◆</div>
+                                    <h4>Love & Relationships</h4>
+                                    <div class="category-preview">Explore romantic energies</div>
+                                </div>
+                                
+                                <div class="category-card" data-category="1" onclick="selectCategory(1)">
+                                    <div class="category-icon career-icon">◇</div>
+                                    <h4>Career & Success</h4>
+                                    <div class="category-preview">Discover professional paths</div>
+                                </div>
+                                
+                                <div class="category-card" data-category="2" onclick="selectCategory(2)">
+                                    <div class="category-icon health-icon">◈</div>
+                                    <h4>Health & Vitality</h4>
+                                    <div class="category-preview">Enhance your wellbeing</div>
+                                </div>
+                                
+                                <div class="category-card" data-category="3" onclick="selectCategory(3)">
+                                    <div class="category-icon money-icon">◉</div>
+                                    <h4>Wealth & Prosperity</h4>
+                                    <div class="category-preview">Unlock financial fortune</div>
+                                </div>
+                            </div>
+                            
+                            <div class="category-detail" id="categoryDetail">
+                                <div class="detail-content">
+                                    <button onclick="closeCategory()" class="close-btn">← Back to Categories</button>
+                                    <div id="categoryContent"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-actions">
+                            <button onclick="goToInformation()" class="action-btn secondary">
+                                <span>← Edit Information</span>
+                            </button>
+                            <button onclick="resetForm()" class="action-btn primary">
+                                <span>New Prophecy</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="aboutPage" class="page">
+                    <div class="about-content laptop-layout">
+                        <div class="about-header">
+                            <h2>Cosmic Guide</h2>
+                            <p class="about-subtitle">Understanding the Ancient Art of Celestial Divination</p>
+                        </div>
+                        
+                        <div class="about-sections">
+                            <div class="about-section">
+                                <h3>The Zodiac System</h3>
+                                <p>For millennia, humanity has looked to the stars for guidance. The zodiac system, rooted in ancient Babylonian astronomy, divides the celestial sphere into twelve distinct sections, each governed by unique cosmic energies and planetary influences.</p>
+                            </div>
+                            
+                            <div class="about-section">
+                                <h3>Cosmic Energy Dynamics</h3>
+                                <p>Our prophecy system analyzes the intricate dance of celestial bodies, calculating how their positions influence your personal energy matrix. Each day brings new alignments, creating unique cosmic signatures that shape your destiny.</p>
+                            </div>
+                            
+                            <div class="about-section">
+                                <h3>Personalized Predictions</h3>
+                                <p>By combining your birth data with real-time astronomical calculations, we generate highly personalized prophecies that reflect the current cosmic climate and its specific impact on your life path.</p>
+                            </div>
+                            
+                            <div class="about-section">
+                                <h3>The Four Pillars</h3>
+                                <p>Our prophecies focus on four fundamental aspects of human experience: Love & Relationships, Career & Success, Health & Vitality, and Wealth & Prosperity. These pillars represent the core areas where celestial influences manifest most powerfully in daily life.</p>
+                            </div>
+                            
+                            <div class="about-section">
+                                <h3>Lunar Influences</h3>
+                                <p>The Moon's gravitational pull affects not only Earth's tides but also human emotions and intuition. Our system tracks lunar phases and their impact on your daily experiences, helping you align with natural rhythms for optimal decision-making and spiritual growth.</p>
+                            </div>
+                            
+                            <div class="about-section">
+                                <h3>Planetary Alignments</h3>
+                                <p>When planets align in specific configurations, they create powerful energy fields that influence earthly events. Our advanced calculations consider Mercury retrogrades, Venus transits, and Mars movements to provide comprehensive cosmic guidance for your journey.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact the Cosmos</h4>
+                    <p><a href="mailto:prophecy@zodiacmystic.com" class="footer-link">Email: prophecy@zodiacmystic.com</a></p>
+                    <p><a href="tel:+15557634222" class="footer-link">Cosmic Hotline: +1 (555) ZODIAC</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Information</h4>
+                    <p><a href="#about" class="footer-link" onclick="navigateToPage('about')">Cosmic Guide</a></p>
+                    <p><a href="#privacy" class="footer-link" onclick="showPrivacyPolicy()">Privacy Policy</a></p>
+                    <p><a href="#terms" class="footer-link" onclick="showTermsOfService()">Terms of Service</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <p><a href="#home" class="footer-link" onclick="navigateToPage('home')">Home</a></p>
+                    <p><a href="admin.html" class="admin-link">Admin Portal</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Zodiac Prophecy - Where Ancient Wisdom Meets Modern Insight</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

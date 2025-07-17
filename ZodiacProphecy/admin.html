@@ -1,0 +1,1148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - The Zodiac Prophecy</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="zodiac-wheel-bg"></div>
+    <div class="moving-stars"></div>
+    <div class="interactive-celestial"></div>
+    <div class="celestial-bg">
+        <div class="stars"></div>
+        
+        <header class="main-header fixed-header">
+            <div class="logo-container">
+                <div class="zodiac-logo">
+                    <div class="logo-symbol">☿</div>
+                </div>
+                <h1 class="brand-title">Admin Dashboard</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">← Return to Prophecy</a>
+            </nav>
+        </header>
+        
+        <div class="container">
+            <main>
+                <div class="page active">
+                    <div class="admin-content laptop-layout">
+                        <div class="admin-header">
+                            <h2 class="main-title">Celestial Data Management</h2>
+                            <p class="hero-subtitle">Access and manage cosmic consultation records with divine authority</p>
+                        </div>
+                        
+                        <div id="loginSection" class="prophecy-form">
+                            <div class="form-header">
+                                <h2>Secure Access Portal</h2>
+                                <p class="form-subtitle">Enter your cosmic authorization code to access the celestial database</p>
+                            </div>
+                            
+                            <div class="form-section">
+                                <div class="input-group" style="margin-bottom: 30px;">
+                                    <label for="adminPassword">Authorization Code:</label>
+                                    <input type="password" id="adminPassword" placeholder="Enter cosmic access code" required>
+                                </div>
+                                
+                                <div class="form-actions" style="margin-top: 25px; padding-top: 15px;">
+                                    <button onclick="adminLogin()" class="submit-btn">
+                                        <span class="btn-text">Access System</span>
+                                        <div class="btn-glow"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="dashboardSection" class="hidden">
+                            <div class="prophecy-result">
+                                <div class="result-header">
+                                    <div class="cosmic-energy-display">
+                                        <div class="energy-meter">
+                                            <div class="energy-level" style="width: 100%;"></div>
+                                        </div>
+                                        <span class="energy-label">System Status: <span style="color: #40e0ff;">Online</span></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="category-grid" style="margin-bottom: 40px;">
+                                    <div class="category-card stat-card filter-card" onclick="filterUsers('all')" id="totalCard">
+                                        <div class="category-icon" style="color: #40e0ff; font-size: 2.5rem;">👥</div>
+                                        <h4>Total Users</h4>
+                                        <div class="stat-number" id="totalUsers">0</div>
+                                    </div>
+                                    
+                                    <div class="category-card stat-card filter-card" onclick="filterUsers('male')" id="maleCard">
+                                        <div class="category-icon" style="color: #0078ff; font-size: 2.5rem;">♂</div>
+                                        <h4>Male Users</h4>
+                                        <div class="stat-number" id="maleUsers">0</div>
+                                    </div>
+                                    
+                                    <div class="category-card stat-card filter-card" onclick="filterUsers('female')" id="femaleCard">
+                                        <div class="category-icon" style="color: #ff6b9d; font-size: 2.5rem;">♀</div>
+                                        <h4>Female Users</h4>
+                                        <div class="stat-number" id="femaleUsers">0</div>
+                                    </div>
+                                    
+                                    <div class="category-card stat-card filter-card" onclick="filterUsers('today')" id="todayCard">
+                                        <div class="category-icon" style="color: #4ecdc4; font-size: 2.5rem;">📅</div>
+                                        <h4>Today's Consultations</h4>
+                                        <div class="stat-number" id="todayUsers">0</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="prophecy-categories">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+                                        <div>
+                                            <h3 class="categories-title">User Registry</h3>
+                                            <div class="categories-subtitle">Manage celestial consultation records</div>
+                                        </div>
+                                        <div class="admin-actions">
+                                            <button onclick="exportData()" class="action-btn primary" style="margin-right: 10px;">
+                                                <span>📊 Export CSV</span>
+                                            </button>
+                                            <button onclick="exportJSON()" class="action-btn primary" style="margin-right: 10px; background: linear-gradient(45deg, #8000ff, #ff6b9d);">
+                                                <span>📋 Export JSON</span>
+                                            </button>
+                                            <button onclick="clearAllData()" class="action-btn" style="background: linear-gradient(45deg, #ff4757, #ff6b6b);">
+                                                <span>🗑️ Clear All Data</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="userData" class="admin-table-container">
+                                        <div class="no-data">
+                                            <div style="font-size: 3rem; margin-bottom: 20px; color: #40e0ff;">🌟</div>
+                                            <div style="font-size: 1.2rem; color: #a0d8ef;">No consultation data available</div>
+                                            <div style="font-size: 1rem; color: #6fb4d3; margin-top: 10px;">Begin celestial consultations to see user data here</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Admin Portal</h4>
+                    <p><a href="#dashboard" class="footer-link" onclick="showAdminInfo('Data Management', 'The admin portal provides secure access to all user consultation records. View real-time statistics, monitor user demographics, and track consultation patterns. All data is encrypted and protected with cosmic-level security protocols.')">Secure data management</a></p>
+                    <p><a href="#overview" class="footer-link" onclick="showAdminInfo('Celestial Oversight', 'Monitor the flow of cosmic consultations in real-time. Track user engagement, prophecy generation rates, and system performance. Ensure the celestial database maintains optimal alignment with universal energies.')">Celestial oversight</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>System Information</h4>
+                    <p><a href="#export" class="footer-link" onclick="showAdminInfo('Data Export', 'Export consultation data in multiple formats including CSV and JSON. Perfect for backup purposes, data analysis, or creating reports for cosmic research. All exports maintain data integrity and include comprehensive user information.')">Data export capabilities</a></p>
+                    <p><a href="#analytics" class="footer-link" onclick="showAdminInfo('User Analytics', 'Access detailed insights about user behavior, consultation patterns, and demographic trends. Analyze peak consultation times, popular prophecy categories, and user engagement metrics to optimize the cosmic experience.')">User analytics</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <p><a href="index.html" class="footer-link">Return to Prophecy</a></p>
+                    <p><a href="#login" class="footer-link" onclick="location.reload()">Logout</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Zodiac Prophecy - Admin Dashboard</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingOverlay = createLoadingOverlay();
+            document.body.appendChild(loadingOverlay);
+            
+            setTimeout(() => {
+                loadingOverlay.classList.add('fade-out');
+                setTimeout(() => loadingOverlay.remove(), 500);
+            }, 1500);
+            
+            // Initialize celestial animations
+            initializeCelestialAnimations();
+            createFloatingParticles();
+            setInterval(createFloatingParticles, 25000);
+        });
+        
+        function initializeCelestialAnimations() {
+            // Create moving cosmic energy streams
+            const celestialBg = document.querySelector('.celestial-bg');
+            for (let i = 0; i < 8; i++) {
+                const stream = document.createElement('div');
+                stream.className = 'cosmic-stream';
+                stream.style.cssText = `
+                    position: fixed;
+                    width: 2px;
+                    height: 100px;
+                    background: linear-gradient(180deg, transparent, #40e0ff, transparent);
+                    left: ${Math.random() * 100}%;
+                    top: -100px;
+                    animation: cosmicStream ${8 + Math.random() * 12}s linear infinite;
+                    animation-delay: ${Math.random() * 10}s;
+                    opacity: 0.6;
+                    z-index: 0;
+                `;
+                celestialBg.appendChild(stream);
+            }
+            
+            // Add cosmic stream animation to style
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes cosmicStream {
+                    0% { transform: translateY(-100px) rotate(15deg); opacity: 0; }
+                    10% { opacity: 0.6; }
+                    90% { opacity: 0.6; }
+                    100% { transform: translateY(calc(100vh + 100px)) rotate(15deg); opacity: 0; }
+                }
+                
+                @keyframes floatUpDown {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    25% { transform: translateY(-15px) rotate(90deg); }
+                    50% { transform: translateY(-30px) rotate(180deg); }
+                    75% { transform: translateY(-15px) rotate(270deg); }
+                }
+                
+                @keyframes pulseGlow {
+                    0%, 100% { box-shadow: 0 0 10px rgba(64, 224, 255, 0.3); }
+                    50% { box-shadow: 0 0 25px rgba(64, 224, 255, 0.8), 0 0 40px rgba(128, 0, 255, 0.4); }
+                }
+                
+                .floating-particle {
+                    position: fixed;
+                    width: 6px;
+                    height: 6px;
+                    background: radial-gradient(circle, #40e0ff, transparent);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 1;
+                    animation: floatUpDown 15s ease-in-out infinite, pulseGlow 3s ease-in-out infinite;
+                }
+                
+                .admin-content {
+                    position: relative;
+                    z-index: 10;
+                }
+                
+                .prophecy-form {
+                    position: relative;
+                    z-index: 10;
+                    animation: formGlow 4s ease-in-out infinite;
+                }
+                
+                @keyframes formGlow {
+                    0%, 100% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.15), 0 0 40px rgba(64, 224, 255, 0.1); }
+                    50% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.15), 0 0 60px rgba(64, 224, 255, 0.2); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function createFloatingParticles() {
+            for (let i = 0; i < 12; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'floating-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle && particle.parentNode) {
+                        particle.remove();
+                    }
+                }, 25000);
+            }
+        }
+        
+        function createLoadingOverlay() {
+            const overlay = document.createElement('div');
+            overlay.className = 'loading-overlay';
+            overlay.innerHTML = `
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Accessing Admin Portal...</div>
+                <div class="loading-bar">
+                    <div class="loading-progress" style="width: 100%;"></div>
+                </div>
+                <div class="loading-percentage">100%</div>
+            `;
+            return overlay;
+        }
+        
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            const correctPassword = 'Rokeben123';
+            
+            if (password === correctPassword) {
+                const loadingOverlay = createLoadingOverlay();
+                loadingOverlay.querySelector('.loading-text').textContent = 'Authenticating Access...';
+                document.body.appendChild(loadingOverlay);
+                
+                setTimeout(() => {
+                    loadingOverlay.classList.add('fade-out');
+                    setTimeout(() => {
+                        loadingOverlay.remove();
+                        document.getElementById('loginSection').classList.add('hidden');
+                        document.getElementById('dashboardSection').classList.remove('hidden');
+                        loadUserData();
+                    }, 500);
+                }, 1200);
+            } else {
+                alert('Invalid access code. Please verify your credentials.');
+                document.getElementById('adminPassword').value = '';
+            }
+        }
+        
+        function loadUserData() {
+            try {
+                const users = JSON.parse(localStorage.getItem('zodiacUsers')) || [];
+                updateStats(users);
+                displayUserTable(users, 'all');
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+        
+        function updateStats(users) {
+            const today = new Date().toDateString();
+            const maleCount = users.filter(user => user.gender === 'MALE').length;
+            const femaleCount = users.filter(user => user.gender === 'FEMALE').length;
+            const todayCount = users.filter(user => 
+                new Date(user.timestamp).toDateString() === today
+            ).length;
+            
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('maleUsers').textContent = maleCount;
+            document.getElementById('femaleUsers').textContent = femaleCount;
+            document.getElementById('todayUsers').textContent = todayCount;
+        }
+        
+        let currentFilter = 'all';
+        let allUsers = [];
+
+        function displayUserTable(users, filterType = 'all') {
+            const userDataDiv = document.getElementById('userData');
+            allUsers = users;
+            currentFilter = filterType;
+            
+            // Filter users based on type
+            let filteredUsers = users;
+            if (filterType === 'male') {
+                filteredUsers = users.filter(user => user.gender === 'MALE');
+            } else if (filterType === 'female') {
+                filteredUsers = users.filter(user => user.gender === 'FEMALE');
+            } else if (filterType === 'today') {
+                const today = new Date().toDateString();
+                filteredUsers = users.filter(user => 
+                    new Date(user.timestamp).toDateString() === today
+                );
+            }
+            
+            // Update active filter card
+            updateFilterCards(filterType);
+            
+            if (filteredUsers.length === 0) {
+                const filterMessages = {
+                    'all': 'No consultation data available',
+                    'male': 'No male users found',
+                    'female': 'No female users found',
+                    'today': 'No consultations today'
+                };
+                
+                userDataDiv.innerHTML = `
+                    <div class="no-data">
+                        <div style="font-size: 3rem; margin-bottom: 20px; color: #40e0ff;">🌟</div>
+                        <div style="font-size: 1.2rem; color: #a0d8ef;">${filterMessages[filterType]}</div>
+                        <div style="font-size: 1rem; color: #6fb4d3; margin-top: 10px;">
+                            ${filterType !== 'all' ? '<button onclick="filterUsers(\'all\')" class="filter-reset-btn">Show All Users</button>' : 'Begin celestial consultations to see user data here'}
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const table = document.createElement('table');
+            table.className = 'data-table';
+            table.style.cssText = `
+                width: 100%;
+                border-collapse: collapse;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 15px;
+                overflow: hidden;
+                backdrop-filter: blur(10px);
+            `;
+            
+            const headerRow = table.insertRow();
+            headerRow.style.background = 'rgba(64, 224, 255, 0.1)';
+            const headers = ['Full Name', 'Gender', 'Birth Date', 'Zodiac Sign', 'Consultation Time', 'Actions'];
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                th.style.cssText = `
+                    padding: 15px;
+                    text-align: left;
+                    color: #40e0ff;
+                    font-family: 'Orbitron', monospace;
+                    font-weight: 600;
+                    letter-spacing: 0.5px;
+                    border-bottom: 1px solid rgba(64, 224, 255, 0.2);
+                `;
+                headerRow.appendChild(th);
+            });
+            
+            filteredUsers.forEach((user, index) => {
+                const row = table.insertRow();
+                row.style.cssText = `
+                    transition: all 0.3s ease;
+                    border-bottom: 1px solid rgba(64, 224, 255, 0.1);
+                `;
+                row.addEventListener('mouseenter', () => {
+                    row.style.background = 'rgba(64, 224, 255, 0.05)';
+                    row.style.transform = 'translateY(-2px)';
+                });
+                row.addEventListener('mouseleave', () => {
+                    row.style.background = 'transparent';
+                    row.style.transform = 'translateY(0)';
+                });
+                
+                const fullName = `${user.surname}, ${user.firstName} ${user.middleInitial}${user.suffix ? ' ' + user.suffix : ''}`;
+                const birthdate = `${user.month}/${user.day}/${user.year}`;
+                const zodiacSign = calculateZodiacSign(user.month, user.day).name;
+                const submissionTime = new Date(user.timestamp).toLocaleString();
+                
+                const cells = [fullName, user.gender, birthdate, zodiacSign, submissionTime];
+                cells.forEach(cellData => {
+                    const cell = row.insertCell();
+                    cell.textContent = cellData;
+                    cell.style.cssText = `
+                        padding: 15px;
+                        color: #e8f4f8;
+                        font-family: 'Exo 2', sans-serif;
+                        border-bottom: 1px solid rgba(64, 224, 255, 0.1);
+                    `;
+                });
+                
+                // Add remove button cell
+                const actionCell = row.insertCell();
+                actionCell.innerHTML = `
+                    <button onclick="removeUser('${user.timestamp}')" class="remove-btn" title="Remove this user">
+                        🗑️
+                    </button>
+                `;
+                actionCell.style.cssText = `
+                    padding: 15px;
+                    text-align: center;
+                    border-bottom: 1px solid rgba(64, 224, 255, 0.1);
+                `;
+            });
+            
+            userDataDiv.innerHTML = '';
+            userDataDiv.appendChild(table);
+        }
+        
+        function filterUsers(filterType) {
+            const users = JSON.parse(localStorage.getItem('zodiacUsers')) || [];
+            displayUserTable(users, filterType);
+            
+            // Scroll to results section after filtering
+            setTimeout(() => {
+                const userDataSection = document.getElementById('userData');
+                if (userDataSection) {
+                    const table = userDataSection.querySelector('.data-table');
+                    if (table) {
+                        // Scroll to show table headers at the top with border visible
+                        const tableTop = table.getBoundingClientRect().top + window.pageYOffset - 150;
+                        window.scrollTo({ 
+                            top: tableTop, 
+                            behavior: 'smooth' 
+                        });
+                    } else {
+                        // Fallback to container if no table
+                        userDataSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }
+                }
+            }, 100);
+        }
+        
+        function updateFilterCards(activeFilter) {
+            const cards = ['totalCard', 'maleCard', 'femaleCard', 'todayCard'];
+            const filterTypes = ['all', 'male', 'female', 'today'];
+            
+            cards.forEach((cardId, index) => {
+                const card = document.getElementById(cardId);
+                if (card) {
+                    if (filterTypes[index] === activeFilter) {
+                        card.style.background = 'rgba(64, 224, 255, 0.2)';
+                        card.style.borderColor = '#40e0ff';
+                        card.style.transform = 'translateY(-3px)';
+                    } else {
+                        card.style.background = 'rgba(255, 255, 255, 0.05)';
+                        card.style.borderColor = 'rgba(64, 224, 255, 0.2)';
+                        card.style.transform = 'translateY(0)';
+                    }
+                }
+            });
+        }
+        
+        function removeUser(timestamp) {
+            showCustomConfirmation(
+                'Remove User Confirmation',
+                'Are you sure you want to permanently remove this user from the cosmic database? This action cannot be undone and will erase all consultation records for this individual.',
+                () => {
+                    try {
+                        let users = JSON.parse(localStorage.getItem('zodiacUsers')) || [];
+                        users = users.filter(user => user.timestamp !== timestamp);
+                        localStorage.setItem('zodiacUsers', JSON.stringify(users));
+                        
+                        // Refresh the display with current filter
+                        updateStats(users);
+                        displayUserTable(users, currentFilter);
+                        
+                        // Show success message
+                        showRemoveNotification('User successfully removed from cosmic database');
+                    } catch (error) {
+                        console.error('Error removing user:', error);
+                        showRemoveNotification('Error occurred while removing user', 'error');
+                    }
+                }
+            );
+        }
+        
+        function showRemoveNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            const backgroundColor = type === 'error' 
+                ? 'linear-gradient(45deg, #ff4757, #ff6b6b)'
+                : 'linear-gradient(45deg, #4ecdc4, #40e0ff)';
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${backgroundColor};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 10000;
+                font-family: 'Orbitron', monospace;
+                box-shadow: 0 10px 30px rgba(64, 224, 255, 0.4);
+                animation: slideInRight 0.5s ease-out;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease-out';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+        
+        function calculateZodiacSign(month, day) {
+            const zodiacSigns = [
+                { name: 'Capricorn', start: [12, 22], end: [1, 19] },
+                { name: 'Aquarius', start: [1, 20], end: [2, 18] },
+                { name: 'Pisces', start: [2, 19], end: [3, 20] },
+                { name: 'Aries', start: [3, 21], end: [4, 19] },
+                { name: 'Taurus', start: [4, 20], end: [5, 20] },
+                { name: 'Gemini', start: [5, 21], end: [6, 20] },
+                { name: 'Cancer', start: [6, 21], end: [7, 22] },
+                { name: 'Leo', start: [7, 23], end: [8, 22] },
+                { name: 'Virgo', start: [8, 23], end: [9, 22] },
+                { name: 'Libra', start: [9, 23], end: [10, 22] },
+                { name: 'Scorpio', start: [10, 23], end: [11, 21] },
+                { name: 'Sagittarius', start: [11, 22], end: [12, 21] }
+            ];
+            
+            for (const sign of zodiacSigns) {
+                if (sign.name === 'Capricorn') {
+                    if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
+                        return sign;
+                    }
+                } else {
+                    const [startMonth, startDay] = sign.start;
+                    const [endMonth, endDay] = sign.end;
+                    
+                    if (month === startMonth && day >= startDay) {
+                        return sign;
+                    } else if (month === endMonth && day <= endDay) {
+                        return sign;
+                    }
+                }
+            }
+            
+            return zodiacSigns[0];
+        }
+        
+        function exportData() {
+            try {
+                const users = JSON.parse(localStorage.getItem('zodiacUsers')) || [];
+                
+                if (users.length === 0) {
+                    alert('No data available for export');
+                    return;
+                }
+                
+                const csvContent = generateCSV(users);
+                downloadFile(csvContent, 'zodiac_consultations.csv', 'text/csv');
+            } catch (error) {
+                console.error('Error exporting data:', error);
+                alert('Error occurred during data export');
+            }
+        }
+        
+        function exportJSON() {
+            try {
+                const users = JSON.parse(localStorage.getItem('zodiacUsers')) || [];
+                
+                if (users.length === 0) {
+                    alert('No data available for export');
+                    return;
+                }
+                
+                const jsonContent = JSON.stringify(users, null, 2);
+                downloadFile(jsonContent, 'zodiac_consultations.json', 'application/json');
+            } catch (error) {
+                console.error('Error exporting JSON data:', error);
+                alert('Error occurred during JSON export');
+            }
+        }
+        
+        function clearAllData() {
+            showCustomConfirmation(
+                'Clear All Data Warning',
+                '⚠️ CRITICAL WARNING: This will permanently delete ALL user consultation data from the cosmic database. This action cannot be undone and will erase every consultation record, user profile, and prophecy history. Are you absolutely certain you want to proceed with this irreversible action?',
+                () => {
+                    showCustomConfirmation(
+                        'Final Confirmation Required',
+                        'This is your final chance to cancel. Once confirmed, all zodiac consultation records will be permanently erased from the cosmic database. There is no way to recover this data.',
+                        () => {
+                            try {
+                                localStorage.removeItem('zodiacUsers');
+                                loadUserData();
+                                showRemoveNotification('✅ All cosmic data has been successfully cleared');
+                            } catch (error) {
+                                console.error('Error clearing data:', error);
+                                showRemoveNotification('❌ Error occurred while clearing data', 'error');
+                            }
+                        }
+                    );
+                }
+            );
+        }
+        
+        function generateCSV(users) {
+            const headers = ['Surname', 'First Name', 'Middle Initial', 'Suffix', 'Gender', 'Month', 'Day', 'Year', 'Zodiac Sign', 'Consultation Time'];
+            const csvRows = [headers.join(',')];
+            
+            users.forEach(user => {
+                const zodiacSign = calculateZodiacSign(user.month, user.day).name;
+                const submissionTime = new Date(user.timestamp).toLocaleString();
+                
+                const row = [
+                    user.surname,
+                    user.firstName,
+                    user.middleInitial || '',
+                    user.suffix || '',
+                    user.gender,
+                    user.month,
+                    user.day,
+                    user.year,
+                    zodiacSign,
+                    submissionTime
+                ];
+                
+                csvRows.push(row.join(','));
+            });
+            
+            return csvRows.join('\n');
+        }
+        
+        function downloadFile(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.click();
+            window.URL.revokeObjectURL(url);
+        }
+        
+        function showAdminInfo(title, content) {
+            const modal = document.createElement('div');
+            modal.className = 'info-modal';
+            modal.innerHTML = `
+                <div class="info-modal-content">
+                    <div class="info-modal-header">
+                        <h3>${title}</h3>
+                        <button onclick="closeAdminInfoModal()" class="info-close-btn">×</button>
+                    </div>
+                    <div class="info-modal-body">
+                        <p>${content}</p>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(modal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeAdminInfoModal();
+            });
+        }
+
+        function closeAdminInfoModal() {
+            const modal = document.querySelector('.info-modal');
+            if (modal) {
+                modal.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => modal.remove(), 300);
+            }
+        }
+
+        function showCustomConfirmation(title, message, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'confirmation-modal';
+            modal.innerHTML = `
+                <div class="confirmation-modal-content">
+                    <div class="confirmation-modal-header">
+                        <h3>${title}</h3>
+                        <div class="warning-icon">⚠️</div>
+                    </div>
+                    <div class="confirmation-modal-body">
+                        <p>${message}</p>
+                    </div>
+                    <div class="confirmation-modal-actions">
+                        <button onclick="closeCustomConfirmation()" class="cancel-btn">
+                            <span>Cancel</span>
+                        </button>
+                        <button onclick="confirmAction()" class="confirm-btn">
+                            <span>Remove User</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Store the confirmation callback
+            window.pendingConfirmAction = onConfirm;
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeCustomConfirmation();
+            });
+        }
+
+        function closeCustomConfirmation() {
+            const modal = document.querySelector('.confirmation-modal');
+            if (modal) {
+                modal.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    modal.remove();
+                    window.pendingConfirmAction = null;
+                }, 300);
+            }
+        }
+
+        function confirmAction() {
+            if (window.pendingConfirmAction) {
+                window.pendingConfirmAction();
+            }
+            closeCustomConfirmation();
+        }
+        
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                adminLogin();
+            }
+        });
+    </script>
+
+    <style>
+        .admin-content {
+            padding: 40px 0;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .filter-card {
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        
+        .filter-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(64, 224, 255, 0.15) !important;
+        }
+        
+        .filter-card:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+        
+        .remove-btn {
+            background: linear-gradient(45deg, #ff4757, #ff6b6b);
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+        }
+        
+        .remove-btn:hover {
+            background: linear-gradient(45deg, #ff3742, #ff5757);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
+        }
+        
+        .remove-btn:active {
+            transform: translateY(0);
+        }
+        
+        .filter-reset-btn {
+            background: linear-gradient(45deg, #40e0ff, #0078ff);
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(64, 224, 255, 0.3);
+        }
+        
+        .filter-reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(64, 224, 255, 0.5);
+        }
+        
+        @keyframes slideInRight {
+            0% { transform: translateX(300px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOutRight {
+            0% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(300px); opacity: 0; }
+        }
+        
+        .admin-header {
+            margin-bottom: 50px;
+            text-align: center;
+            animation: headerFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes headerFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(64, 224, 255, 0.2) !important;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(64, 224, 255, 0.1) !important;
+            border-color: #40e0ff !important;
+            box-shadow: 0 15px 40px rgba(64, 224, 255, 0.3);
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(64, 224, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .stat-card:hover::before {
+            left: 100%;
+        }
+        
+        .stat-card .stat-number {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #40e0ff;
+            margin-top: 15px;
+            font-family: 'Orbitron', monospace;
+            text-shadow: 0 0 10px rgba(64, 224, 255, 0.5);
+            animation: numberPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .admin-actions .action-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .admin-actions .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(64, 224, 255, 0.4);
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 80px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            border: 2px solid rgba(64, 224, 255, 0.2);
+            backdrop-filter: blur(15px);
+            animation: noDataFloat 8s ease-in-out infinite;
+        }
+        
+        @keyframes noDataFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .admin-table-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            padding: 30px;
+            border: 2px solid rgba(64, 224, 255, 0.2);
+            overflow-x: auto;
+            backdrop-filter: blur(15px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .prophecy-form {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(64, 224, 255, 0.08) 100%) !important;
+            backdrop-filter: blur(30px) !important;
+            border: 2px solid rgba(64, 224, 255, 0.3) !important;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.6),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2),
+                0 0 50px rgba(64, 224, 255, 0.15) !important;
+        }
+        
+        .input-group input {
+            transition: all 0.4s ease !important;
+        }
+        
+        .input-group input:focus {
+            transform: scale(1.02) !important;
+            box-shadow: 
+                0 0 25px rgba(64, 224, 255, 0.5),
+                inset 0 2px 0 rgba(255, 255, 255, 0.15) !important;
+        }
+        
+        .submit-btn {
+            position: relative !important;
+            overflow: hidden !important;
+            animation: buttonGlow 4s ease-in-out infinite !important;
+        }
+        
+        @keyframes buttonGlow {
+            0%, 100% { box-shadow: 0 8px 25px rgba(64, 224, 255, 0.3); }
+            50% { box-shadow: 0 12px 35px rgba(64, 224, 255, 0.5), 0 0 30px rgba(128, 0, 255, 0.3); }
+        }
+        
+        .confirmation-modal-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(64, 224, 255, 0.12) 100%);
+            backdrop-filter: blur(30px);
+            border: 3px solid rgba(255, 71, 87, 0.4);
+            border-radius: 25px;
+            padding: 35px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            position: relative;
+            text-align: center;
+        }
+
+        .confirmation-modal-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 71, 87, 0.25);
+            padding-bottom: 20px;
+        }
+
+        .confirmation-modal-header h3 {
+            font-family: 'Orbitron', monospace;
+            color: #ff4757;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+        }
+
+        .warning-icon {
+            font-size: 2rem;
+            animation: warningPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .confirmation-modal-body p {
+            color: #e8f4f8;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin: 0 0 30px 0;
+            text-shadow: 0 0 10px rgba(232, 244, 248, 0.2);
+        }
+
+        .confirmation-modal-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cancel-btn {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid rgba(64, 224, 255, 0.4);
+            border-radius: 25px;
+            color: #40e0ff;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cancel-btn:hover {
+            background: rgba(64, 224, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(64, 224, 255, 0.3);
+        }
+
+        .confirm-btn {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff4757, #ff6b6b);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .confirm-btn:hover {
+            background: linear-gradient(45deg, #ff3742, #ff5757);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 71, 87, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .admin-actions {
+                justify-content: center;
+                width: 100%;
+                gap: 10px;
+            }
+            
+            .categories-title {
+                text-align: center;
+            }
+            
+            .categories-subtitle {
+                text-align: center;
+            }
+            
+            .admin-content {
+                padding: 20px 0;
+            }
+            
+            .no-data {
+                padding: 60px 20px;
+            }
+            
+            .admin-table-container {
+                padding: 20px;
+            }
+            
+            .confirmation-modal-content {
+                padding: 25px;
+                max-width: 95%;
+            }
+            
+            .confirmation-modal-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .cancel-btn, .confirm-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</body>
+</html>
