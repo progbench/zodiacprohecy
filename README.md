@@ -19,7 +19,7 @@
 - JavaScript  
 
 ### Backend
-- Java (Servlets or plain Java logic)
+- Java
 
 ---
 
